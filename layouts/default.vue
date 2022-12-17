@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <NuxtLoadingIndicator />
     <v-navigation-drawer v-model="drawer">
       <v-card>
         <div class="mx-auto py-3 text-center">
@@ -24,6 +25,6 @@
   </v-app>
 </template>
 
-<script>
-  export default { data: () => ({ drawer: null }) };
+<script setup>
+  const drawer = ref(null);
 </script>
