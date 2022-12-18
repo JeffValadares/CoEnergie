@@ -4,7 +4,9 @@
     <v-navigation-drawer v-model="drawer">
       <v-card>
         <div class="mx-auto py-3 text-center">
-          <v-avatar color="brown" size="80"></v-avatar>
+          <nuxt-link to="/">
+            <img src="~/assets/logo.jpg" class="w-100 px-3" alt="Logo"/>
+          </nuxt-link>
         </div>
         <v-divider></v-divider>
         <v-list nav>
@@ -16,7 +18,7 @@
 
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>💩CoEnergie</v-toolbar-title>
+      <v-toolbar-title>CoEnergie</v-toolbar-title>
     </v-app-bar>
 
     <v-main>

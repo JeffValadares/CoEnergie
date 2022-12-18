@@ -1,4 +1,6 @@
-<script setup>  
+<script setup>
+  definePageMeta({ middleware: 'auth' });
+  
   const supabase = useSupabaseClient();
   const pending = ref(false);
   const msg = reactive({
