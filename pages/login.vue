@@ -1,20 +1,27 @@
 <script setup>
-  const supabase = useSupabaseClient();
+  const supabase = useSupabaseAuthClient();
   const user = useSupabaseUser();
-
+  const router = useRouter();
   const pending = ref(false);
   const formData = reactive({ email: null, password: null });
   const msg = reactive({ type: null, text: null });
 
-  watchEffect(() => {
-    if (user.value) navigateTo('/produtos');
+  watch(user, () => {
+    if(user.value) router.push('/produtos');
   });
 
   const login = async () => {
     try {
       pending.value = true;
-      const { error } = await supabase.auth.signInWithPassword(formData);
+      const { data: response, error } = await supabase.auth.signInWithPassword(formData);
       if (error) throw error;
+      const accessToken = useCookie('sb-access-token');
+      const refreshToken = useCookie('sb-refresh-token');
+      accessToken.value = response.session?.access_token ?? null;
+      refreshToken.value = response.session?.refresh_token ?? null;
+      msg.type = 'success';
+      msg.text = 'Login bem sucedido';
+      router.push('/produtos');
     } catch(error) {
       msg.type = 'error';
       msg.text = error.message;
