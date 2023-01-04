@@ -29,21 +29,6 @@
       pending.value = false;
     }
   }
-
-  const signUp = async () => {
-    try {
-      pending.value = true;
-      const { error } = await supabase.auth.signUp(formData);
-      if (error) throw error;
-      msg.type = 'success';
-      msg.text = 'Usuário cadastrado com sucesso';
-    } catch {
-      msg.type = 'error';
-      msg.text = error.message;
-    } finally {
-      pending.value = false;
-    }
-  }
 </script>
 
 <template>
